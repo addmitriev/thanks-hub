@@ -1,4 +1,4 @@
-package net.thankhub;
+package net.thankhub.service;
 
 import com.yandex.money.api.exceptions.InsufficientScopeException;
 import com.yandex.money.api.exceptions.InvalidRequestException;
@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-public class YaMoneyTest implements ApiTest2 {
+public class YaMoneyTest implements ApiTest {
 
     @Test(enabled = false)
     public void test() throws InvalidTokenException, InsufficientScopeException, InvalidRequestException, IOException {

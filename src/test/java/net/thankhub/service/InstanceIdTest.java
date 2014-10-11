@@ -1,4 +1,4 @@
-package net.thankhub;
+package net.thankhub.service;
 
 import com.yandex.money.api.methods.InstanceId;
 import com.yandex.money.api.model.Error;
