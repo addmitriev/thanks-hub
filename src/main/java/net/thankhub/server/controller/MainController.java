@@ -27,7 +27,6 @@ public class MainController {
         model.addAttribute("response_type", "code");
         model.addAttribute("redirect_uri", YaService.REDIRECT_URI);
         model.addAttribute("scope", "account-info operation-details payment-p2p");
-        model.addAttribute("instance_name", gitHubUser);
         model.addAttribute("gitHubUser", gitHubUser);
 
         request.getSession().setAttribute("gitHubUser", gitHubUser);
