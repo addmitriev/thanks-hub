@@ -15,15 +15,37 @@ var thankshub =  {
 	    $('li.commit.commits-list-item').append(thankshub_btn_list_wrapper);
 	    $('.details-collapse .button-group').append(thanks_button);
 	    thankshub.bindEvents();
+	    var img_src = chrome.extension.getURL('icon.png'); 
+	    $('body').append('<style>.thankshub_form .header .logo:before { background: url('+img_src+') no-repeat; background-size:100%;}')
 
 	},
 	auth: function(){
 
-	    var iframe = document.createElement('iframe');
-	    $(iframe).attr('src',"https://thanks-hub.herokuapp.com/form?user="+thankshub.reciever);
-	    $(iframe).addClass('thankshub_iframe');
-	    thankshub.createModal("Thanks!",iframe);
-	   	iframe.src = iframe.src;
+	    // var iframe = document.createElement('iframe');
+	    // $(iframe).attr('src', chrome.extension.getURL("iframe.html"));
+	    // $(iframe).addClass('thankshub_iframe');
+	    var content = '<div class="thankshub_form">\
+    <div class="container">\
+        <div class="header">\
+            <div class="logo">Thanks Hub!</div>\
+        </div>\
+        <div class="body">\
+            <form action="https://sp-money.yandex.ru/oauth/authorize" method="post" data-submit-auth="">\
+                <div class="form-group">\
+                    <label for="input">Give money <i>ya-est</i> </label>\
+                     <input type="hidden" name="client_id" value="6C5764252E3AFFAFD29B1023327C8AA75F8D95B1CE9C4DD457132DD7BF31D6C0"/>\
+                     <input type="hidden" name="response_type" value="code"/>\
+                     <input type="hidden" name="redirect_uri" value="http://thanks-hub.herokuapp.com/api/auth"/>\
+                     <input type="hidden" name="scope" value="account-info operation-details payment-p2p"/>\
+                </div>\
+                <div class="form-group">\
+                    <input type="submit" value="Pay with Yandex.Money"/>\
+                </div>\
+            </form>\
+        </div>\
+    </div>\
+	    </div>';
+	    thankshub.createModal("Thanks!",content);
 
 	},
 	bindEvents: function(){
@@ -49,6 +71,17 @@ var thankshub =  {
 			e.stopPropagation();
 			$(this).parents('.thankshub_modal_wrapper').remove();
 		});
+
+		$(document).on('submit','[data-submit-auth]', function(e){
+			e.preventDefault();
+			var form = $(this).clone();
+			$(this).find('[type="submit"]').attr('disabled', 'disabled');
+			var auth_window = window.open("", "_blank");
+			auth_window.document.body.appendChild(form[0]);
+			form.hide();
+			form.submit();
+		});
+
 		eventBinded = true;
 		
 	},
@@ -71,8 +104,11 @@ var thankshub =  {
 		$(modal_wrapper).append(modal);
 		$(modal_body).append(content);
 		$('body').append(modal_wrapper);
-	}
+	},
 
+	createPaymentForm: function(form){
+
+	}
 
 	
 }
