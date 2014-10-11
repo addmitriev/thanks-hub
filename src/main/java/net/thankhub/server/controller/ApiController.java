@@ -11,7 +11,7 @@ public class ApiController {
 
     @RequestMapping(value = "/api/user/{user}/commit/{commit}")
     @ResponseBody
-    public String getWallet(@PathVariable("user") int user, @PathVariable("commit") int commit) {
+    public String getWallet(@PathVariable("user") String user, @PathVariable("commit") String commit) {
         return "{clientId: 12321312}";
     }
 }
