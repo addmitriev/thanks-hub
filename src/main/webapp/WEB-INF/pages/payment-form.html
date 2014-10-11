@@ -8,7 +8,7 @@
         <div class="logo">Thanks Hub!</div>
     </div>
     <div class="body">
-        <form action="https://m.sp-money.yandex.ru/oauth/authorize" method="post">
+        <form action="https://thanks-hub.herokuapp.com/api/payment" method="post">
             <div class="form-group">
                 <label for="amount">Amount:</label>
                 <input type="text" name="amount" id="amount" placeholder="Amount"/>
@@ -21,5 +21,9 @@
         </form>
     </div>
 </div>
+<script>
+    this.parent.thankshub.createPaymentForm($('body').html());
+    this.close();
+</script>
 </body>
 </html>
