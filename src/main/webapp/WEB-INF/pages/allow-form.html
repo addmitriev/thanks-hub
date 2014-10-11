@@ -14,7 +14,7 @@
     <div class="body">
         <form action="https://m.sp-money.yandex.ru/oauth/authorize" method="post">
             <div class="form-group">
-                <label for="input">Give money to<i th:text="${gitHubUser}">ya-est</i> </label>
+                <label for="input">Give money to <i th:text="${gitHubUser}">ya-est</i> </label>
                 <input type="hidden" name="client_id" th:value="${client_id}"/>
                 <input type="hidden" name="response_type" th:value="${response_type}"/>
                 <input type="hidden" name="redirect_uri" th:value="${redirect_uri}"/>

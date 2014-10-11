@@ -5,15 +5,33 @@
     <link rel="shortcut icon" href="images/icon.png?v=2" type="image/x-icon"/>
     <link rel="stylesheet" href="/css/style.css"/>
     <link rel="stylesheet" href="/css/reset.css"/>
+    <style>
+        .container {
+            margin: 0 auto;
+            width: 920px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo">Thanks Hub!</div>
-        </div>
-        <div class="body">
-           <p th:text="${result}">You are awesome!</p>
-        </div>
+<div class="container">
+    <div class="header">
+        <div class="logo">Thanks Hub!</div>
     </div>
-</body>	
+    <div class="body">
+        <p>Please link your GitHub and Yandex.Modey accounts</p>
+
+        <form action="api/link" method="post">
+            <div class="form-group">
+                <label for="github">GitHub:</label>
+                <input type="text" name="github" id="github"/>
+                <label for="yandex">Yandex.Money:</label>
+                <input type="text" name="yandex" id="yandex"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Link!"/>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
 </html>
