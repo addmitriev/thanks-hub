@@ -18,12 +18,16 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Controller
+@RequestMapping(value = "/api")
 public class ApiController {
 
     @Autowired
     private NameResolver nameResolver;
 
-    @RequestMapping(value = {"/api/auth", "/api/auth/"}, method = RequestMethod.GET)
+    @Autowired
+    private YaService yaService;
+
+    @RequestMapping(value = {"/auth", "/auth/"}, method = RequestMethod.GET)
     public String auth(@RequestParam("code") String code, Model model, HttpServletRequest request) throws IOException {
         model.addAttribute("code", code);
         String gitHubUser = (String) request.getSession().getAttribute("gitHubUser");
@@ -31,11 +35,10 @@ public class ApiController {
         return "payment-form";
     }
 
-    @RequestMapping(value = {"/api/payment", "/api/payment/"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/payment", "/payment/"}, method = RequestMethod.POST)
     public String payment(@RequestParam("code") String code, @RequestParam("amount") String amount,
                           @RequestParam("gitHubUser") String gitHubUser, Model model)
             throws IOException, InsufficientScopeException, InvalidTokenException, InvalidRequestException {
-        YaService yaService = new YaService();
         RequestPayment requestPayment = yaService.send(code, nameResolver.fromGitHub(gitHubUser), amount,
                 "Thanks for commit to" + gitHubUser,
                 "Thanks for commit on GitHub");

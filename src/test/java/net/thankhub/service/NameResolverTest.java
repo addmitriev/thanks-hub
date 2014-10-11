@@ -22,9 +22,10 @@ public class NameResolverTest {
 
     @Test
     public void test() {
-        String result = nameResolver.fromGitHub("11");
 
         assertNotNull(nameResolver);
+
+        String result = nameResolver.fromGitHub("11");
         assertEquals("thankshub@yandex.ru", result);
     }
 }

@@ -16,6 +16,11 @@ import java.util.Map;
 @Controller
 public class MainController {
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index() throws IOException {
+        return "index";
+    }
+
     @RequestMapping(value = {"/form", "/form/"}, method = RequestMethod.GET)
     public String start(@RequestParam("user") String gitHubUser, Model model, HttpServletRequest request) throws IOException {
         model.addAttribute("client_id", YaService.CLIENT_ID);

@@ -8,10 +8,12 @@ import com.yandex.money.api.methods.RequestPayment;
 import com.yandex.money.api.methods.Token;
 import com.yandex.money.api.net.DefaultApiClient;
 import com.yandex.money.api.net.OAuth2Session;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.HashMap;
 
+@Component
 public class YaService {
 
     public static final String CLIENT_ID = "6C5764252E3AFFAFD29B1023327C8AA75F8D95B1CE9C4DD457132DD7BF31D6C0";
@@ -35,9 +37,7 @@ public class YaService {
 
         OAuth2Session session = new OAuth2Session(new DefaultApiClient(CLIENT_ID, true));
         session.setDebugLogging(true);
-
         Token token = session.execute(new Token.Request(code, CLIENT_ID, REDIRECT_URI, null));
-
         ym.setAccessToken(token.getAccessToken());
 
         HashMap<String, String> params = new HashMap<>();

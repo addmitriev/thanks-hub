@@ -1,5 +1,3 @@
-package net.thankhub.service;
-
 /**
  * @author Slava Yasevich (vyasevich@yamoney.ru)
  */
