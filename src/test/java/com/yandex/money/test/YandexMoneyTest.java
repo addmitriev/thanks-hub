@@ -28,7 +28,7 @@ import java.util.HashMap;
 /**
  *
  */
-@Test(enabled=false)
+@Test
 public class YandexMoneyTest implements ApiTest {
 
     private static final String PATTERN_ID_PHONE_TOPUP = PhoneParams.PATTERN_ID;
@@ -72,7 +72,7 @@ public class YandexMoneyTest implements ApiTest {
         Assert.assertNull(respInstanceId.getError());
     }
 
-    @Test(enabled=false)
+    @Test
     public void testInstanceIdFail() throws IOException, InsufficientScopeException,
             InvalidTokenException, InvalidRequestException {
 
@@ -85,7 +85,7 @@ public class YandexMoneyTest implements ApiTest {
         Assert.assertNull(respInstanceId.getInstanceId());
     }
 
-    @Test(enabled=false)
+    @Test
     public void testRequestExternalPayment() throws IOException, InsufficientScopeException,
             InvalidTokenException, InvalidRequestException {
 
@@ -93,7 +93,7 @@ public class YandexMoneyTest implements ApiTest {
         respRequestExternalPayment = testRequestPayment(reqRequestExternalPayment);
     }
 
-    @Test(enabled=false)
+    @Test
     public void testRequestPayment() throws InvalidTokenException, InsufficientScopeException,
             InvalidRequestException, IOException {
 

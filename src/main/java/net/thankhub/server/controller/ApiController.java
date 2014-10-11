@@ -21,12 +21,19 @@ public class ApiController {
     public String getWallet(@PathVariable("user") String user, @PathVariable("commit") String commit) {
         return "{clientId: 12321312}";
     }
+    @ResponseBody
+    @RequestMapping(value = "/api/payment/user/{user}/token/{token}")
+    public String payment(@PathVariable("user") String user, @PathVariable("commit") String commit) {
+        return "{OK}";
+    }
 
     @ResponseBody
     @RequestMapping(value = {"/api/auth", "/api/auth/"}, method = RequestMethod.GET)
     public String auth(WebRequest request) throws IOException {
         Map<String, String[]> parameterMap = request.getParameterMap();
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(parameterMap);
+        String string = objectMapper.writeValueAsString(parameterMap);
+        return "<html><body><script>parent.thankshub.log();"+
+                "</script></body></html>";
     }
 }
