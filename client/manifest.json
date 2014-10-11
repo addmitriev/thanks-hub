@@ -1,0 +1,13 @@
+{
+  "name": "Thanks Hub",
+  "version": "1.0",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [ "https://github.com/*" ],
+      "js": [  "jquery.js","thankshub.js","background.js" ],
+      "css": ["thankshub.css"],  
+  	  "run_at": "document_end"
+    }
+  ]
+}
