@@ -100,3 +100,9 @@
 	display: block;
 	padding-bottom: 5px;
 }
+
+
+.body p {
+	font: 13px/1.4 Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+	font-weight: bold;
+}

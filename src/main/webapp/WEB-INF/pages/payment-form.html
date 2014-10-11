@@ -1,24 +1,29 @@
 <html>
 <head>
-    <link rel="stylesheet" href="/css/bootstrap.css"/>
-    <title>Thanks-hub!</title>
+    <title>Thanks Hub!</title>
+    <link rel="icon" href="images/icon.png?v=2" type="image/x-icon">
+    <link rel="shortcut icon" href="images/icon.png?v=2" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/reset.css"/>
 </head>
 <body>
-<div class="container">
-    <h1><img src="img/icon.png" width="32" height="32"/>Thanks-hub</h1>
-
-    <form action="/api/payment" method="post">
-        For: <span>%username%</span>
-
-        <div>
-            $&nbsp;<input type="text" name="amount" placeholder="Amount"/>
-            <input type="hidden" name="code" th:value="${code}"/>
-            <input type="hidden" name="gitHubUser" th:value="${gitHubUser}"/>
-            <button type="submit">Give!</button>
+    <div class="container">
+        <div class="header">
+            <div class="logo">Thanks Hub!</div>
         </div>
-    </form>
-</div>
-<script src="/js/jquery.js"></script>
-<script src="/js/underscore.js"></script>
+        <div class="body">
+            <form action="https://m.sp-money.yandex.ru/oauth/authorize" method="post">
+                <div class="form-group">
+                    <label for="input">Amount:</label>
+                    <input type="text" name="amount" placeholder="Amount"/>
+                     <input type="hidden" name="code" th:value="${code}"/>
+                     <input type="hidden" name="gitHubUser" th:value="${gitHubUser}"/>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Proceed!"/>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
