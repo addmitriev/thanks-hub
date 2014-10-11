@@ -19,4 +19,12 @@ public class ApiController {
         model.addAttribute("string1", objectMapper.writeValueAsString(parameterMap));
         return "auth";
     }
+
+    @RequestMapping(value = {"/api/start", "/api/start/"}, method = RequestMethod.POST)
+    public String start(@RequestParam("amount") int amount, @RequestParam("user") String user, Model model) throws IOException {
+        model.addAttribute("status", "OK");
+        model.addAttribute("user", user);
+        model.addAttribute("amount", amount);
+        return "success";
+    }
 }
