@@ -5,11 +5,17 @@ import com.yandex.money.api.exceptions.InsufficientScopeException;
 import com.yandex.money.api.exceptions.InvalidRequestException;
 import com.yandex.money.api.exceptions.InvalidTokenException;
 import com.yandex.money.api.methods.RequestPayment;
+import com.yandex.money.api.methods.Token;
+import com.yandex.money.api.net.DefaultApiClient;
+import com.yandex.money.api.net.OAuth2Session;
 
 import java.io.IOException;
 import java.util.HashMap;
 
 public class YaService {
+
+    public static final String CLIENT_ID = "6C5764252E3AFFAFD29B1023327C8AA75F8D95B1CE9C4DD457132DD7BF31D6C0";
+    public static final String REDIRECT_URI = "http://thanks-hub.herokuapp.com/api/auth";
 
     public static final String PATTERN_ID = "p2p";
     public static final String TO = "to";
@@ -19,15 +25,20 @@ public class YaService {
 
     private YandexMoney ym;
 
-    public YaService(String clientId) {
-        ym = new YandexMoney(clientId);
+    public YaService() {
+        ym = new YandexMoney(CLIENT_ID);
         ym.setDebugLogging(true);
     }
 
-    public RequestPayment send(String accessToken, String to, String amount, String messageFrom, String messageTo)
+    public RequestPayment send(String code, String to, String amount, String messageFrom, String messageTo)
             throws IOException, InsufficientScopeException, InvalidTokenException, InvalidRequestException {
 
-        ym.setAccessToken(accessToken);
+        OAuth2Session session = new OAuth2Session(new DefaultApiClient(CLIENT_ID, true));
+        session.setDebugLogging(true);
+
+        Token token = session.execute(new Token.Request(code, CLIENT_ID, REDIRECT_URI, null));
+
+        ym.setAccessToken(token.getAccessToken());
 
         HashMap<String, String> params = new HashMap<>();
 

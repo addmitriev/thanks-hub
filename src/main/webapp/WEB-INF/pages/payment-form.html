@@ -7,12 +7,13 @@
 <div class="container">
     <h1><img src="img/icon.png" width="32" height="32"/>Thanks-hub</h1>
 
-    <form action="api/start" method="post">
+    <form action="/api/payment" method="post">
         For: <span>%username%</span>
 
         <div>
             $&nbsp;<input type="text" name="amount" placeholder="Amount"/>
-            <input type="hidden" name="user" th:value="${user}"/>
+            <input type="hidden" name="code" th:value="${code}"/>
+            <input type="hidden" name="gitHubUser" th:value="${gitHubUser}"/>
             <button type="submit">Give!</button>
         </div>
     </form>
