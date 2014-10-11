@@ -38,8 +38,15 @@ var thankshub =  {
 			e.stopPropagation();
 			$(this).remove();
 		});
-		$(document).on('click', ".thankshub_modal_wrapper *", function(e){
+
+		$(document).on('click', ".thankshub_modal_wrapper", function(e){
 			e.stopPropagation();
+			$(this).remove();
+		});
+
+		$(document).on('click', ".thankshub_modal_close", function(e){
+			e.stopPropagation();
+			$(this).parents('.thankshub_modal_wrapper').remove();
 		});
 	},
 
@@ -50,6 +57,7 @@ var thankshub =  {
 	    var modal_body = document.createElement('div');
 	    var modal_heading = document.createElement('h1');
 	    $(modal_heading).text(heading);
+	    $(modal_header).append('<a href="#" class="thankshub_modal_close thankshub_modal_close_times right">×</a>')
 		$(modal).addClass('thankshub_modal');
 		$(modal_wrapper).addClass('thankshub_modal_wrapper');
 		$(modal_header).addClass('thankshub_modal_header');

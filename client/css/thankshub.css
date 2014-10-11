@@ -42,6 +42,18 @@
 	border-radius: 0 0 3px 3px;
 }
 
+.thankshub_modal_close {
+	color:#cccccc;
+	text-decoration: none;
+	font-size:20px;
+	line-height: 20px;
+}
+.thankshub_modal_close:hover {
+	color:#ffffff;
+	text-decoration: none;
+
+}
+
 .thankshub_iframe {
 	border:0;
 	width:560px;
