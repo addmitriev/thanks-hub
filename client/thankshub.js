@@ -1,5 +1,6 @@
 var eventBinded = false;
 var thankshub =  { 
+	reciever: false,
 	init: function() {
 	    var thanks_button = document.createElement('a');
 	    $(thanks_button).attr('href', '#');
@@ -19,7 +20,7 @@ var thankshub =  {
 	auth: function(){
 
 	    var iframe = document.createElement('iframe');
-	    $(iframe).attr('src',"https://thanks-hub.herokuapp.com/form");
+	    $(iframe).attr('src',"https://thanks-hub.herokuapp.com/form?user="+thankshub.reciever);
 	    $(iframe).addClass('thankshub_iframe');
 	    thankshub.createModal("Thanks!",iframe);
 	   	iframe.src = iframe.src;
@@ -31,7 +32,7 @@ var thankshub =  {
 			$('.thankshub_modal_wrapper').remove();
 		    e.preventDefault();
 		    var _self = $(this);
-		    var reciever = $(_self.parents('.commit').find('.commit-author')).text();
+		   thankshub.reciever = $(_self.parents('.commit').find('.commit-author')).text();
 		   thankshub.auth();
 		});
 
