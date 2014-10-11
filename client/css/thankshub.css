@@ -1,0 +1,49 @@
+.thankshub_btn_list_wrapper {
+	width:110px;
+}
+.thankshub_modal_wrapper {
+	position:fixed;
+ 	height: -webkit-calc(100%); 
+	width:100%;
+	top:0;
+	left:0;
+	background:rgba(0,0,0,0.4);
+	z-index:10000;
+}
+
+.thankshub_modal {
+	width:600px;
+	height:400px;
+	margin:0 auto;
+	margin-top:150px;
+}
+.thankshub_modal .thankshub_modal_header {
+	position: relative;
+	padding: 10px 20px;
+	margin: 0;
+	color: #fff;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+	background-color: #829aa8;
+	border: 1px solid #768995;
+	border-radius: 3px 3px 0 0;
+}
+
+.thankshub_modal .thankshub_modal_header h1 {
+	margin-top: 0;
+	margin-bottom: 0;
+	font-size: 16px;
+}
+.thankshub_modal .thankshub_modal_body {
+	padding: 20px;
+	font-size: 14px;
+	background-color: #fff;
+	border: 1px solid #d8dee2;
+	border-top: 0;
+	border-radius: 0 0 3px 3px;
+}
+
+.thankshub_iframe {
+	border:0;
+	width:560px;
+	height:360px;
+}

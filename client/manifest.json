@@ -5,9 +5,20 @@
   "content_scripts": [
     {
       "matches": [ "https://github.com/*" ],
-      "js": [  "jquery.js","thankshub.js","background.js" ],
-      "css": ["thankshub.css"],  
+      "js": [ "vendor/js/jquery.js",
+              "thankshub.js",
+              "background.js"
+        ],
+      "css": ["css/thankshub.css"],  
   	  "run_at": "document_end"
     }
-  ]
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+        "<all_urls>",
+        "notifications",
+        "storage",
+        "https://thanks-hub.herokuapp.com/"
+
+    ]
 }

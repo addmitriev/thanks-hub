@@ -1,1 +1,1 @@
-window.addEventListener("load", thankshub());
+window.addEventListener("load", thankshub.init());
