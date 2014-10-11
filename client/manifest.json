@@ -16,10 +16,6 @@
   "web_accessible_resources": ["thankshub.js","background.js"],
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "permissions": [
-        "<all_urls>",
-        "notifications",
-        "storage",
         "https://thanks-hub.herokuapp.com/"
-
     ]
 }
