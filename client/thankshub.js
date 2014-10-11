@@ -14,13 +14,12 @@ var thankshub =  {
 	    $('li.commit.commits-list-item').append(thankshub_btn_list_wrapper);
 	    $('.details-collapse .button-group').append(thanks_button);
 	    thankshub.bindEvents();
-	    console.log($.pjax)
 
 	},
 	auth: function(){
 
 	    var iframe = document.createElement('iframe');
-	    iframe.src = "https://thanks-hub.herokuapp.com/form.html";
+	    $(iframe).attr('src',"https://thanks-hub.herokuapp.com/form.html");
 	    $(iframe).addClass('thankshub_iframe');
 	    thankshub.createModal("Thanks!",iframe);
 	   	iframe.src = iframe.src;
