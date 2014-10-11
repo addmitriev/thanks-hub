@@ -23,7 +23,7 @@ public class ApiController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/api/auth/", method = RequestMethod.GET)
+    @RequestMapping(value = {"/api/auth", "/api/auth/"}, method = RequestMethod.GET)
     public String auth(WebRequest request) throws IOException {
         Map<String, String[]> parameterMap = request.getParameterMap();
         ObjectMapper objectMapper = new ObjectMapper();
