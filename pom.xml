@@ -368,6 +368,7 @@
                         <contextPath>/</contextPath>
                     </webAppConfig>
                 </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -388,7 +389,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
             </plugin>
         </plugins>
     </build>
