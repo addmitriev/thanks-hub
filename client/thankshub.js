@@ -14,12 +14,13 @@ var thankshub =  {
 	    $('li.commit.commits-list-item').append(thankshub_btn_list_wrapper);
 	    $('.details-collapse .button-group').append(thanks_button);
 	    thankshub.bindEvents();
+	    console.log($.pjax)
 
 	},
 	auth: function(){
 
 	    var iframe = document.createElement('iframe');
-	    iframe.src = "https://thanks-hub.herokuapp.com/index.html";
+	    iframe.src = "https://thanks-hub.herokuapp.com/form.html";
 	    $(iframe).addClass('thankshub_iframe');
 	    thankshub.createModal("Thanks!",iframe);
 	   	iframe.src = iframe.src;
@@ -39,9 +40,8 @@ var thankshub =  {
 			$(this).remove();
 		});
 
-		$(document).on('click', ".thankshub_modal_wrapper", function(e){
+		$(document).on('click', ".thankshub_modal_wrapper *", function(e){
 			e.stopPropagation();
-			$(this).remove();
 		});
 
 		$(document).on('click', ".thankshub_modal_close", function(e){
@@ -57,10 +57,10 @@ var thankshub =  {
 	    var modal_body = document.createElement('div');
 	    var modal_heading = document.createElement('h1');
 	    $(modal_heading).text(heading);
-	    $(modal_header).append('<a href="#" class="thankshub_modal_close thankshub_modal_close_times right">×</a>')
 		$(modal).addClass('thankshub_modal');
 		$(modal_wrapper).addClass('thankshub_modal_wrapper');
 		$(modal_header).addClass('thankshub_modal_header');
+	    $(modal_header).append('<a href="#" class="thankshub_modal_close thankshub_modal_close_times right">×</a>')
 		$(modal_header).append(modal_heading);
 		$(modal_body).addClass('thankshub_modal_body');
 		$(modal).append(modal_header);
