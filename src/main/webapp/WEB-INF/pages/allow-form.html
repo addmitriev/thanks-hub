@@ -1,31 +1,31 @@
 <html>
 <head>
     <title>Thanks Hub!</title>
-    <link rel="icon" href="images/icon.png?v=2" type="image/x-icon">
-    <link rel="shortcut icon" href="images/icon.png?v=2" type="image/x-icon">
+    <link rel="icon" href="images/icon.png?v=2" type="image/x-icon"/>
+    <link rel="shortcut icon" href="images/icon.png?v=2" type="image/x-icon"/>
     <link rel="stylesheet" href="/css/style.css"/>
     <link rel="stylesheet" href="/css/reset.css"/>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo">Thanks Hub!</div>
-        </div>
-        <div class="body">
-            <form action="https://m.sp-money.yandex.ru/oauth/authorize" method="post">
-                <div class="form-group">
-                    <label for="input">Give money <i th:text="${gitHubUser}">ya-est</i> </label>
-                     <input type="hidden" name="client_id" th:value="${client_id}"/>
-                     <input type="hidden" name="response_type" th:value="${response_type}"/>
-                     <input type="hidden" name="redirect_uri" th:value="${redirect_uri}"/>
-                     <input type="hidden" name="scope" th:value="${scope}"/>
-                     <input type="hidden" name="instance_name" th:value="${instance_name}"/>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Pay with Yandex.Money"/>
-                </div>
-            </form>
-        </div>
+<div class="container">
+    <div class="header">
+        <div class="logo">Thanks Hub!</div>
     </div>
+    <div class="body">
+        <form action="https://m.sp-money.yandex.ru/oauth/authorize" method="post">
+            <div class="form-group">
+                <label for="input">Give money <i th:text="${gitHubUser}">ya-est</i> </label>
+                <input type="hidden" name="client_id" th:value="${client_id}"/>
+                <input type="hidden" name="response_type" th:value="${response_type}"/>
+                <input type="hidden" name="redirect_uri" th:value="${redirect_uri}"/>
+                <input type="hidden" name="scope" th:value="${scope}"/>
+                <input type="hidden" name="instance_name" th:value="${instance_name}"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Pay with Yandex.Money"/>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
