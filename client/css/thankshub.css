@@ -14,8 +14,9 @@
 .thankshub_modal {
 	width:600px;
 	height:400px;
-	margin:0 auto;
-	margin-top:150px;
+	margin: auto;
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0;
 }
 .thankshub_modal .thankshub_modal_header {
 	position: relative;
@@ -42,7 +43,7 @@
 	border-radius: 0 0 3px 3px;
 }
 
-.thankshub_modal_close {
+.thankshub_modal_close_times {
 	color:#cccccc;
 	text-decoration: none;
 	font-size:20px;
