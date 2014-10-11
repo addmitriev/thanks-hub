@@ -1,7 +1,5 @@
 package net.thankhub.server.controller;
 
-import com.yandex.money.api.methods.RequestPayment;
-import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
