@@ -61,6 +61,8 @@ var thankshub =  {
 		    e.stopPropagation();
 		    var _self = $(this);
 		   localStorage.setItem('thankshub_reciever',$(_self.parents('.commit').find('.commit-author')).text());
+   		   localStorage.setItem('thankshub_commit_id',$(_self.parents('.commit').find('.commit-links-group .sha')).attr('href'));
+
 		   thankshub.auth();
 		});
 
@@ -132,6 +134,7 @@ var thankshub =  {
 
 	createPaymentForm: function(code){
 		var reciever = localStorage.getItem('thankshub_reciever');
+		var commit_id = 'https://github.com' + localStorage.getItem('thankshub_commit_id');
 		var content = ' <div class="container">\
         <div class="header">\
             <div class="logo">ThanksHub!</div>\
@@ -143,6 +146,7 @@ var thankshub =  {
                     <input type="text" name="amount" placeholder="Amount"/>\
                      <input type="hidden" name="code" value="'+code+'"/>\
                      <input type="hidden" name="gitHubUser" value="'+reciever+'"/>\
+                     <input type="hidden" name="commitId" value="'+commit_id+'"/>\
                 </div>\
                 <div class="form-group">\
                     <input type="submit" value="Proceed!" data-loading="false"/>\
