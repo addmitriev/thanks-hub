@@ -5,7 +5,7 @@ var thankshub =  {
 	init: function() {
 	    var thanks_button = document.createElement('a');
 	    $(thanks_button).attr('href', '#');
-	    $(thanks_button).text('Thanks it!');
+	    $(thanks_button).text('Thanks for it!');
 	    $(thanks_button).addClass('minibutton thankshub_btn');
 
 	    var thankshub_btn_list = $(thanks_button).clone();
@@ -28,28 +28,30 @@ var thankshub =  {
 	    // var iframe = document.createElement('iframe');
 	    // $(iframe).attr('src', chrome.extension.getURL("iframe.html"));
 	    // $(iframe).addClass('thankshub_iframe');
+		var reciever = localStorage.getItem('thankshub_reciever');
+
 	    var content = '<div class="thankshub_form">\
     <div class="container">\
         <div class="header">\
-            <div class="logo">Thanks Hub!</div>\
+            <div class="logo">ThanksHub!</div>\
         </div>\
         <div class="body">\
             <form action="https://sp-money.yandex.ru/oauth/authorize" method="post" data-submit-auth="">\
                 <div class="form-group">\
-                    <label for="input">Give money <i>ya-est</i> </label>\
+                    <label for="input">Send money to <i>'+reciever+'</i> </label>\
                      <input type="hidden" name="client_id" value="6C5764252E3AFFAFD29B1023327C8AA75F8D95B1CE9C4DD457132DD7BF31D6C0"/>\
                      <input type="hidden" name="response_type" value="code"/>\
                      <input type="hidden" name="redirect_uri" value="http://thanks-hub.herokuapp.com/api/auth"/>\
                      <input type="hidden" name="scope" value="account-info operation-details payment-p2p"/>\
                 </div>\
                 <div class="form-group">\
-                    <input type="submit" value="Pay with Yandex.Money"/>\
+                    <input type="submit" value="Pay with Yandex.Money" data-loading="false"/>\
                 </div>\
             </form>\
         </div>\
     </div>\
 	    </div>';
-	    thankshub.createModal("Thanks!",content);
+	    thankshub.createModal("ThanksHub!",content);
 
 	},
 	bindEvents: function(){
@@ -80,6 +82,10 @@ var thankshub =  {
 			e.preventDefault();
 			e.stopPropagation();
 			var form = $(this).clone().off();
+			var btn = $(this).find('[data-loading="false"]')
+			btn.attr('disabled', 'disabled')
+			btn.attr('data-loading', 'true');
+			btn.val('OAuth in process...');
 			$(this).find('[type="submit"]').attr('disabled', 'disabled');
 			var auth_window = window.open("", "_blank");
 			my_window = auth_window;
@@ -91,6 +97,10 @@ var thankshub =  {
 
 		$(document).on('submit','[data-submit-payment]', function(e){
 			e.preventDefault();
+			var btn = $(this).find('[data-loading="false"]')
+			btn.attr('disabled', 'disabled')
+			btn.attr('data-loading', 'true');
+			btn.val('Payment in process...');
 			$.post('https://thanks-hub.herokuapp.com/api/payment', $(this).serialize(), function(data){
 				$('.thankshub_form').html(data);
 			});
@@ -124,7 +134,7 @@ var thankshub =  {
 		var reciever = localStorage.getItem('thankshub_reciever');
 		var content = ' <div class="container">\
         <div class="header">\
-            <div class="logo">Thanks Hub!</div>\
+            <div class="logo">ThanksHub!</div>\
         </div>\
         <div class="body">\
             <form action="https://thanks-hub.herokuapp.com/api/payment" method="post" data-submit-payment="">\
@@ -135,7 +145,7 @@ var thankshub =  {
                      <input type="hidden" name="gitHubUser" value="'+reciever+'"/>\
                 </div>\
                 <div class="form-group">\
-                    <input type="submit" value="Proceed!"/>\
+                    <input type="submit" value="Proceed!" data-loading="false"/>\
                 </div>\
             </form>\
         </div>\

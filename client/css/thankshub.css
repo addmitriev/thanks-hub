@@ -1,5 +1,5 @@
 .thankshub_btn_list_wrapper {
-	width:110px;
+	width:125px;
 }
 .thankshub_modal_wrapper {
 	position:fixed;
@@ -69,7 +69,7 @@
 }
 .thankshub_form .container {
 	width:560px;
-	height:360px;
+	height:210px;
 }
 
 .thankshub_form .header {
@@ -152,6 +152,15 @@
 	width:100%;
 }
 
+.thankshub_form .body form input[type="submit"]:disabled {
+	background: #ccc;
+}
+
+.thankshub_form .body form input[type="submit"]:disabled:hover {
+	background: #ccc;
+	cursor: default;
+}
+
 .thankshub_form .body form input[type="submit"]:hover {
 	text-decoration: none;
 	background-color: #ddd;
@@ -174,4 +183,10 @@
 .thankshub_form .body p {
 	font: 13px/1.4 Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
 	font-weight: bold;
+}
+
+.thankshub_form .body form input[data-loading="true"]:disabled,.thankshub_form .body form input[data-loading="true"]:disabled:hover {
+	background: #dddddd url('chrome-extension://__MSG_@@extension_id__/ajax-loader.gif') no-repeat;
+	background-size: 20px 20px;
+	background-position: 160px 5.5px;
 }
