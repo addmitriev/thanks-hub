@@ -46,7 +46,7 @@ public class YaService {
 
         HashMap<String, String> params = new HashMap<>();
 
-        params.put(TO, URLEncoder.encode(to, "UTF-8"));
+        params.put(TO, to);
         params.put(AMOUNT, amount);
         params.put(MESSAGE_FROM, messageFrom);
         params.put(MESSAGE_TO, messageTo);
