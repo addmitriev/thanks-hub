@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by Евгений on 11.10.2014.
@@ -45,5 +46,14 @@ public class NameResolverTest {
 
         nameResolver.addPair("ya-east", "thankshub@yandex.ru");
         nameResolver.addPair("ya-east", "thankshub@yandex.ru");
+    }
+
+    @Test
+    public void testNotExistingUser() {
+
+        assertNotNull(nameResolver);
+
+        String user = nameResolver.fromGitHub("ya-east1");
+        assertNull(user);
     }
 }

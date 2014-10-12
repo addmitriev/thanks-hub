@@ -32,10 +32,15 @@ public class ApiController {
                           @RequestParam("gitHubUser") String gitHubUser, Model model)
             throws IOException, InsufficientScopeException, InvalidTokenException, InvalidRequestException {
         String to = nameResolver.fromGitHub(gitHubUser);
+        if (to == null) {
+            model.addAttribute("status", "fail");
+            model.addAttribute("error", "User does not exists yet.");
+            return "success";
+        }
         RequestPayment requestPayment = yaService.send(code, to, amount,
                 "Thanks for commit to" + gitHubUser,
                 "Thanks for commit on GitHub");
-        model.addAttribute("status", requestPayment.getStatus());
+        model.addAttribute("status", requestPayment.getStatus().toString().toLowerCase());
         model.addAttribute("error", requestPayment.getError());
         return "success";
     }
