@@ -11,6 +11,7 @@ import com.yandex.money.api.net.OAuth2Session;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 
 @Component
@@ -35,7 +36,7 @@ public class YaService {
     public RequestPayment send(String code, String to, String amount, String messageFrom, String messageTo)
             throws IOException, InsufficientScopeException, InvalidTokenException, InvalidRequestException {
 
-        System.out.println("Code: " + code + ", To: " + to + "Amount: " + amount);
+        System.out.println("Code: " + code + ", To: " + to + ", Amount: " + amount);
 
         OAuth2Session session = new OAuth2Session(new DefaultApiClient(CLIENT_ID, true));
         session.setDebugLogging(true);
@@ -45,7 +46,7 @@ public class YaService {
 
         HashMap<String, String> params = new HashMap<>();
 
-        params.put(TO, to);
+        params.put(TO, URLEncoder.encode(to, "UTF-8"));
         params.put(AMOUNT, amount);
         params.put(MESSAGE_FROM, messageFrom);
         params.put(MESSAGE_TO, messageTo);
