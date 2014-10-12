@@ -1,4 +1,5 @@
 var eventBinded = false;
+var my_window;
 var thankshub =  { 
 	reciever: false,
 	init: function() {
@@ -17,7 +18,7 @@ var thankshub =  {
 	    thankshub.bindEvents();
 	    var img_src = chrome.extension.getURL('icon.png'); 
 	    $('body').append('<style>.thankshub_form .header .logo:before { background: url('+img_src+') no-repeat; background-size:100%;}')
-
+	    chrome.runtime.sendMessage('thankshub');
 	},
 	auth: function(){
 
@@ -54,7 +55,7 @@ var thankshub =  {
 			$('.thankshub_modal_wrapper').remove();
 		    e.preventDefault();
 		    var _self = $(this);
-		   thankshub.reciever = $(_self.parents('.commit').find('.commit-author')).text();
+		   localStorage.setItem('thankshub_reciever',$(_self.parents('.commit').find('.commit-author')).text());
 		   thankshub.auth();
 		});
 
@@ -77,10 +78,18 @@ var thankshub =  {
 			var form = $(this).clone();
 			$(this).find('[type="submit"]').attr('disabled', 'disabled');
 			var auth_window = window.open("", "_blank");
+			my_window = auth_window;
 			auth_window.document.body.appendChild(form[0]);
 			form.hide();
 			form.submit();
 		});
+
+		$(document).on('submit','[data-submit-payment]', function(e){
+			e.preventDefault();
+			$.post('https://thanks-hub.herokuapp.com/api/payment', $(this).serialize(), function(data){
+				$('.thankshub_form').html(data);
+			});
+		})
 
 		eventBinded = true;
 		
@@ -106,8 +115,27 @@ var thankshub =  {
 		$('body').append(modal_wrapper);
 	},
 
-	createPaymentForm: function(form){
-
+	createPaymentForm: function(code){
+		var reciever = localStorage.getItem('thankshub_reciever');
+		var content = ' <div class="container">\
+        <div class="header">\
+            <div class="logo">Thanks Hub!</div>\
+        </div>\
+        <div class="body">\
+            <form action="https://thanks-hub.herokuapp.com/api/payment" method="post" data-submit-payment="">\
+                <div class="form-group">\
+                    <label for="input">Amount:</label>\
+                    <input type="text" name="amount" placeholder="Amount"/>\
+                     <input type="hidden" name="code" value="'+code+'"/>\
+                     <input type="hidden" name="gitHubUser" value="'+reciever+'"/>\
+                </div>\
+                <div class="form-group">\
+                    <input type="submit" value="Proceed!"/>\
+                </div>\
+            </form>\
+        </div>\
+    </div>'
+    	$('.thankshub_form').html(content);
 	}
 
 	
@@ -116,3 +144,4 @@ var thankshub =  {
 $(document).on('pjax:complete', function(){
 	thankshub.init();
 })
+

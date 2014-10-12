@@ -1,9 +1,21 @@
-window.addEventListener("load", thankshub.init());
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+    if (typeof changeInfo.url != 'undefined') {
+    	if (changeInfo.url.indexOf('http://thanks-hub.herokuapp.com/api/auth?code=') != -1) {
+    		var startindex ='http://thanks-hub.herokuapp.com/api/auth?code='.length;
+    		var code = changeInfo.url.substring(startindex,changeInfo.url.length);
+    		var tab = localStorage.getItem('thankshub_tab');
+			chrome.tabs.sendMessage(parseInt(tab), code, function(){});
+    	}
 
-var s = document.createElement('script');
-// TODO: add "script.js" to web_accessible_resources in manifest.json
-s.src = chrome.extension.getURL('thankshub.js');
-s.onload = function() {
-    this.parentNode.removeChild(this);
-};
-(document.head||document.documentElement).appendChild(s);
+    }
+    
+
+});
+
+chrome.runtime.onMessage.addListener(function(message, sender){
+	localStorage.setItem('thankshub_tab',sender.tab.id);
+}) 
+
+function sendMessage(){
+	chrome.tabs.sendMessage(tab, 'test', function(){});
+}

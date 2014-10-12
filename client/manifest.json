@@ -2,21 +2,26 @@
   "name": "Thanks Hub",
   "version": "1.0",
   "manifest_version": 2,
+  "background": { "scripts": ["background.js"]},
   "content_scripts": [
     {
       "matches": [ "https://github.com/*" ],
       "js": [ "vendor/js/jquery.js",
               "thankshub.js",
-              "background.js"
+              "init.js"
         ],
       "css": ["css/thankshub.css"],  
   	  "run_at": "document_end"
     }
   ],
   "sandbox" : ["iframe.html"],
-  "web_accessible_resources": ["thankshub.js","background.js","inject.js", "iframe.html", "icon.png"],
+  "web_accessible_resources": ["thankshub.js","background.html","inject.js", "iframe.html", "icon.png"],
   "permissions": [
-        "https://thanks-hub.herokuapp.com/",
-        "https://m.sp-money.yandex.ru/oauth/authorize"
+        "*://thanks-hub.herokuapp.com/*",
+        "https://m.sp-money.yandex.ru/oauth/authorize",
+        "tabs",
+        "webRequest",
+        "background"
+
     ]
 }
