@@ -37,7 +37,8 @@ public class ApiController {
 
     @RequestMapping(value = {"/payment", "/payment/"}, method = RequestMethod.POST)
     public String payment(@RequestParam("code") String code, @RequestParam("amount") String amount,
-                          @RequestParam("gitHubUser") String gitHubUser, Model model)
+                          @RequestParam("gitHubUser") String gitHubUser,
+                          @RequestParam("commitId") String commitId, Model model)
             throws IOException, InsufficientScopeException, InvalidTokenException, InvalidRequestException {
         String to = nameResolver.fromGitHub(gitHubUser);
         if (to == null) {
@@ -46,8 +47,8 @@ public class ApiController {
             return "success";
         }
         RequestPayment requestPayment = yaService.send(code, to, amount,
-                "Thanks for commit to" + gitHubUser,
-                "Thanks for commit on GitHub");
+                "Thanks for commit to " + gitHubUser,
+                "Thanks for commit on GitHub for commit " + commitId);
         model.addAttribute("status", requestPayment.getStatus().toString().toLowerCase());
         model.addAttribute("error", requestPayment.getError());
         return "success";
