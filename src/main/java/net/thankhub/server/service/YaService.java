@@ -57,7 +57,10 @@ public class YaService {
 
         RequestPayment execute = ym.execute(new RequestPayment.Request(PATTERN_ID, params));
         String requestId = execute.getRequestId();
-        ProcessPayment execute1 = ym.execute(new ProcessPayment.Request(requestId, new Wallet(), null, null, null));
-        return execute1;
+        if ("success".equals(execute.getStatus().toString().toLowerCase())) {
+            ProcessPayment execute1 = ym.execute(new ProcessPayment.Request(requestId, new Wallet(), null, null, null));
+            return execute1;
+        }
+        return null;
     }
 }

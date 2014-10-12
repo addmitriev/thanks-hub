@@ -50,8 +50,12 @@ public class ApiController {
         ProcessPayment payment = yaService.send(code, to, amount,
                 "Thanks for commit to " + gitHubUser,
                 "Thanks for commit on GitHub for commit " + commitId);
-        model.addAttribute("status", payment.getStatus().toString().toLowerCase());
-        model.addAttribute("error", payment.getError());
+        if(payment != null) {
+            model.addAttribute("status", payment.getStatus().toString().toLowerCase());
+            model.addAttribute("error", payment.getError());
+        } else {
+            model.addAttribute("status", "fail");
+        }
         return "success";
     }
 
