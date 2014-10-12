@@ -15,10 +15,13 @@ var thankshub =  {
 	    $(thankshub_btn_list_wrapper).append(thankshub_btn_list);
 	    $('li.commit.commits-list-item').append(thankshub_btn_list_wrapper);
 	    $('.details-collapse .button-group').append(thanks_button);
-	    thankshub.bindEvents();
-	    var img_src = chrome.extension.getURL('icon.png'); 
-	    $('body').append('<style>.thankshub_form .header .logo:before { background: url('+img_src+') no-repeat; background-size:100%;}')
-	    chrome.runtime.sendMessage('thankshub');
+	    if (typeof chrome.extension != 'undefined') {
+		    var img_src = chrome.extension.getURL('icon.png'); 
+    		$('body').append('<style>.thankshub_form .header .logo:before { background: url('+img_src+') no-repeat; background-size:100%;}')
+	    }
+	    if (typeof chrome.runtime != 'undefined') {
+		    chrome.runtime.sendMessage('thankshub');
+	    }
 	},
 	auth: function(){
 
@@ -52,8 +55,8 @@ var thankshub =  {
 	bindEvents: function(){
 		if (eventBinded == true) return false;
 		$(document).on('click', '.thankshub_btn', function (e) {
-			$('.thankshub_modal_wrapper').remove();
 		    e.preventDefault();
+		    e.stopPropagation();
 		    var _self = $(this);
 		   localStorage.setItem('thankshub_reciever',$(_self.parents('.commit').find('.commit-author')).text());
 		   thankshub.auth();
@@ -75,7 +78,8 @@ var thankshub =  {
 
 		$(document).on('submit','[data-submit-auth]', function(e){
 			e.preventDefault();
-			var form = $(this).clone();
+			e.stopPropagation();
+			var form = $(this).clone().off();
 			$(this).find('[type="submit"]').attr('disabled', 'disabled');
 			var auth_window = window.open("", "_blank");
 			my_window = auth_window;
@@ -83,6 +87,7 @@ var thankshub =  {
 			form.hide();
 			form.submit();
 		});
+
 
 		$(document).on('submit','[data-submit-payment]', function(e){
 			e.preventDefault();

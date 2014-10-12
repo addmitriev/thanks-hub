@@ -2,14 +2,11 @@
   "name": "Thanks Hub",
   "version": "1.0",
   "manifest_version": 2,
-<<<<<<< HEAD
   "background": { "scripts": ["background.js"]},
-=======
   "icons": { "16": "icon.png",
            "48": "icon.png",
           "128": "icon.png" },
   "homepage_url": "https://thanks-hub.herokuapp.com/",
->>>>>>> c4f9c5dc52cc9bc9381855790a0f6927b60a58f1
   "content_scripts": [
     {
       "matches": [ "https://github.com/*" ],
