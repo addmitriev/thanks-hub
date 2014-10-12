@@ -4,8 +4,12 @@ import com.yandex.money.api.YandexMoney;
 import com.yandex.money.api.exceptions.InsufficientScopeException;
 import com.yandex.money.api.exceptions.InvalidRequestException;
 import com.yandex.money.api.exceptions.InvalidTokenException;
+import com.yandex.money.api.methods.AccountInfo;
+import com.yandex.money.api.methods.ProcessPayment;
 import com.yandex.money.api.methods.RequestPayment;
 import com.yandex.money.api.methods.Token;
+import com.yandex.money.api.model.MoneySource;
+import com.yandex.money.api.model.Wallet;
 import com.yandex.money.api.net.DefaultApiClient;
 import com.yandex.money.api.net.OAuth2Session;
 import org.springframework.stereotype.Component;
@@ -33,7 +37,7 @@ public class YaService {
         ym.setDebugLogging(true);
     }
 
-    public RequestPayment send(String code, String to, String amount, String messageFrom, String messageTo)
+    public ProcessPayment send(String code, String to, String amount, String messageFrom, String messageTo)
             throws IOException, InsufficientScopeException, InvalidTokenException, InvalidRequestException {
 
         System.out.println("Code: " + code + ", To: " + to + ", Amount: " + amount);
@@ -51,6 +55,9 @@ public class YaService {
         params.put(MESSAGE_FROM, messageFrom);
         params.put(MESSAGE_TO, messageTo);
 
-        return ym.execute(new RequestPayment.Request(PATTERN_ID, params));
+        RequestPayment execute = ym.execute(new RequestPayment.Request(PATTERN_ID, params));
+        String requestId = execute.getRequestId();
+        ProcessPayment execute1 = ym.execute(new ProcessPayment.Request(requestId, new Wallet(), null, null, null));
+        return execute1;
     }
 }

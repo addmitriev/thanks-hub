@@ -3,6 +3,7 @@ package net.thankhub.server.controller;
 import com.yandex.money.api.exceptions.InsufficientScopeException;
 import com.yandex.money.api.exceptions.InvalidRequestException;
 import com.yandex.money.api.exceptions.InvalidTokenException;
+import com.yandex.money.api.methods.ProcessPayment;
 import com.yandex.money.api.methods.RequestPayment;
 import net.thankhub.server.service.NameResolver;
 import net.thankhub.server.service.YaService;
@@ -46,11 +47,11 @@ public class ApiController {
             model.addAttribute("error", "User does not exists yet.");
             return "success";
         }
-        RequestPayment requestPayment = yaService.send(code, to, amount,
+        ProcessPayment payment = yaService.send(code, to, amount,
                 "Thanks for commit to " + gitHubUser,
                 "Thanks for commit on GitHub for commit " + commitId);
-        model.addAttribute("status", requestPayment.getStatus().toString().toLowerCase());
-        model.addAttribute("error", requestPayment.getError());
+        model.addAttribute("status", payment.getStatus().toString().toLowerCase());
+        model.addAttribute("error", payment.getError());
         return "success";
     }
 
