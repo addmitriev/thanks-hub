@@ -27,6 +27,14 @@ public class ApiController {
     @Autowired
     private YaService yaService;
 
+    @RequestMapping(value = {"/auth", "/auth/"}, method = RequestMethod.GET)
+    public String auth(@RequestParam("code") String code, Model model, HttpServletRequest request) throws IOException {
+        model.addAttribute("code", code);
+        String gitHubUser = (String) request.getSession().getAttribute("gitHubUser");
+        model.addAttribute("gitHubUser", gitHubUser);
+        return "payment-form";
+    }
+
     @RequestMapping(value = {"/payment", "/payment/"}, method = RequestMethod.POST)
     public String payment(@RequestParam("code") String code, @RequestParam("amount") String amount,
                           @RequestParam("gitHubUser") String gitHubUser, Model model)
