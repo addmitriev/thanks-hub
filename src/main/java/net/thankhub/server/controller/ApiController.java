@@ -42,8 +42,16 @@ public class ApiController {
         RequestPayment requestPayment = yaService.send(code, nameResolver.fromGitHub(gitHubUser), amount,
                 "Thanks for commit to" + gitHubUser,
                 "Thanks for commit on GitHub");
-        model.addAttribute("result", requestPayment.toString());
+        model.addAttribute("status", requestPayment.getStatus());
+        model.addAttribute("error", requestPayment.getError());
         return "success";
+    }
+
+    @RequestMapping(value = {"/link", "/link/"}, method = RequestMethod.POST)
+    public String link(@RequestParam("github") String github, @RequestParam("yandex") String yandex)
+            throws IOException, InsufficientScopeException, InvalidTokenException, InvalidRequestException {
+        nameResolver.addPair(github, yandex);
+        return "linked";
     }
 
 }

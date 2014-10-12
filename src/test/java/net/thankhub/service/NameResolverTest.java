@@ -25,7 +25,7 @@ public class NameResolverTest {
 
         assertNotNull(nameResolver);
 
-        String result = nameResolver.fromGitHub("11");
+        String result = nameResolver.fromGitHub("zamonier");
         assertEquals("thankshub@yandex.ru", result);
     }
 }

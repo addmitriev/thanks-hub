@@ -1,29 +1,29 @@
 <html>
 <head>
     <title>Thanks Hub!</title>
-    <link rel="icon" href="images/icon.png?v=2" type="image/x-icon"/>
-    <link rel="shortcut icon" href="images/icon.png?v=2" type="image/x-icon"/>
-    <link rel="stylesheet" href="/css/style.css"/>
-    <link rel="stylesheet" href="/css/reset.css"/>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo">Thanks Hub!</div>
-        </div>
-        <div class="body">
-            <form action="https://m.sp-money.yandex.ru/oauth/authorize" method="post">
-                <div class="form-group">
-                    <label for="input">Amount:</label>
-                    <input type="text" name="amount" placeholder="Amount"/>
-                     <input type="hidden" name="code" th:value="${code}"/>
-                     <input type="hidden" name="gitHubUser" th:value="${gitHubUser}"/>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Proceed!"/>
-                </div>
-            </form>
-        </div>
+<div class="container">
+    <div class="header">
+        <div class="logo">Thanks Hub!</div>
     </div>
+    <div class="body">
+        <form action="https://thanks-hub.herokuapp.com/api/payment" method="post">
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="text" name="amount" id="amount" placeholder="Amount"/>
+                <input type="hidden" name="code" th:value="${code}"/>
+                <input type="hidden" name="gitHubUser" th:value="${gitHubUser}"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Proceed!"/>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    var form_string=document.body.innerHTML;
+    this.close();
+</script>
 </body>
 </html>
