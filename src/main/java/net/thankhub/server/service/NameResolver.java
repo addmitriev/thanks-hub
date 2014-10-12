@@ -20,11 +20,10 @@ public class NameResolver {
         return gitHubToYaMoneyNames.get(gitHubName);
     }
 
-    public String fromYaMoney(String yaName) {
-        return gitHubToYaMoneyNames.inverse().get(yaName);
-    }
-
     public void addPair(String gitHub, String yaMoney) {
+        if (gitHubToYaMoneyNames.containsKey(gitHub)) {
+            throw new IllegalArgumentException("User already exists!");
+        }
         gitHubToYaMoneyNames.put(gitHub, yaMoney);
     }
 }

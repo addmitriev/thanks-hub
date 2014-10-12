@@ -28,4 +28,22 @@ public class NameResolverTest {
         String result = nameResolver.fromGitHub("zamonier");
         assertEquals("thankshub@yandex.ru", result);
     }
+
+    @Test
+    public void testAdd() {
+
+        assertNotNull(nameResolver);
+
+        nameResolver.addPair("ya-east", "thankshub@yandex.ru");
+        assertEquals("thankshub@yandex.ru", nameResolver.fromGitHub("ya-east"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testDoubleAdd() {
+
+        assertNotNull(nameResolver);
+
+        nameResolver.addPair("ya-east", "thankshub@yandex.ru");
+        nameResolver.addPair("ya-east", "thankshub@yandex.ru");
+    }
 }

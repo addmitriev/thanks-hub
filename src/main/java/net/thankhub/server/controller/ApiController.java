@@ -27,31 +27,17 @@ public class ApiController {
     @Autowired
     private YaService yaService;
 
-    @RequestMapping(value = {"/auth", "/auth/"}, method = RequestMethod.GET)
-    public String auth(@RequestParam("code") String code, Model model, HttpServletRequest request) throws IOException {
-        model.addAttribute("code", code);
-        String gitHubUser = (String) request.getSession().getAttribute("gitHubUser");
-        model.addAttribute("gitHubUser", gitHubUser);
-        return "payment-form";
-    }
-
     @RequestMapping(value = {"/payment", "/payment/"}, method = RequestMethod.POST)
     public String payment(@RequestParam("code") String code, @RequestParam("amount") String amount,
                           @RequestParam("gitHubUser") String gitHubUser, Model model)
             throws IOException, InsufficientScopeException, InvalidTokenException, InvalidRequestException {
-        RequestPayment requestPayment = yaService.send(code, nameResolver.fromGitHub(gitHubUser), amount,
+        String to = nameResolver.fromGitHub(gitHubUser);
+        RequestPayment requestPayment = yaService.send(code, to, amount,
                 "Thanks for commit to" + gitHubUser,
                 "Thanks for commit on GitHub");
         model.addAttribute("status", requestPayment.getStatus());
         model.addAttribute("error", requestPayment.getError());
         return "success";
-    }
-
-    @RequestMapping(value = {"/link", "/link/"}, method = RequestMethod.POST)
-    public String link(@RequestParam("github") String github, @RequestParam("yandex") String yandex)
-            throws IOException, InsufficientScopeException, InvalidTokenException, InvalidRequestException {
-        nameResolver.addPair(github, yandex);
-        return "linked";
     }
 
 }
