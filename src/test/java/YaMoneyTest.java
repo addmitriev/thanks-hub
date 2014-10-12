@@ -2,6 +2,7 @@ import com.yandex.money.api.exceptions.InsufficientScopeException;
 import com.yandex.money.api.exceptions.InvalidRequestException;
 import com.yandex.money.api.exceptions.InvalidTokenException;
 import com.yandex.money.api.methods.BaseRequestPayment;
+import com.yandex.money.api.methods.ProcessPayment;
 import com.yandex.money.api.methods.RequestPayment;
 import net.thankhub.server.service.YaService;
 import org.testng.Assert;
@@ -20,15 +21,11 @@ public class YaMoneyTest implements ApiTest {
         String messageFrom = "Комментарий к переводу, отображается в истории отправителя.";
         String messageTo = "Комментарий к переводу, отображается получателю.";
 
-        RequestPayment response = new YaService().send(ACCESS_TOKEN, to, amount, messageFrom, messageTo);
+        ProcessPayment response = new YaService().send(ACCESS_TOKEN, to, amount, messageFrom, messageTo);
 
         Assert.assertNotNull(response);
         Assert.assertEquals(response.getStatus(), BaseRequestPayment.Status.SUCCESS);
         Assert.assertNull(response.getError());
-        Assert.assertNotNull(response.getRequestId());
-        Assert.assertTrue(response.getRequestId().length() > 0);
-        Assert.assertEquals(response.getContractAmount(), new BigDecimal("1.00"));
-
     }
 
 }

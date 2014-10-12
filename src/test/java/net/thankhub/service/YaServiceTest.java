@@ -3,6 +3,7 @@ package net.thankhub.service;
 import com.yandex.money.api.exceptions.InsufficientScopeException;
 import com.yandex.money.api.exceptions.InvalidRequestException;
 import com.yandex.money.api.exceptions.InvalidTokenException;
+import com.yandex.money.api.methods.ProcessPayment;
 import com.yandex.money.api.methods.RequestPayment;
 import net.thankhub.server.service.NameResolver;
 import net.thankhub.server.service.YaService;
@@ -35,7 +36,7 @@ public class YaServiceTest {
 
         assertNotNull(yaService);
 
-        RequestPayment result = yaService.send("1", nameResolver.fromGitHub("zamonier"), "1.00",
+        ProcessPayment result = yaService.send("1", nameResolver.fromGitHub("zamonier"), "1.00",
                 "Thanks for commit to" + "zamonier",
                 "Thanks for commit on GitHub");
         assertNotNull(result);
