@@ -14,6 +14,7 @@ public class NameResolver {
     @PostConstruct
     public void init() {
         gitHubToYaMoneyNames.put("zamonier", "thankshub@yandex.ru");
+        gitHubToYaMoneyNames.put("ya-est", "dmalexeydm@yandex.ru");
     }
 
     public String fromGitHub(String gitHubName) {

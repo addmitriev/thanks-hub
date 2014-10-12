@@ -50,9 +50,6 @@ public class YaService {
         params.put(MESSAGE_FROM, messageFrom);
         params.put(MESSAGE_TO, messageTo);
 
-        params.put("test_payment", "true");
-        params.put("test_result", "success");
-
         return ym.execute(new RequestPayment.Request(PATTERN_ID, params));
     }
 }
