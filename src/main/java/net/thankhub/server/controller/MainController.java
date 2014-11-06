@@ -4,20 +4,15 @@ import com.yandex.money.api.exceptions.InsufficientScopeException;
 import com.yandex.money.api.exceptions.InvalidRequestException;
 import com.yandex.money.api.exceptions.InvalidTokenException;
 import net.thankhub.server.service.NameResolver;
-import net.thankhub.server.service.YaService;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.WebRequest;
-import org.thymeleaf.util.StringUtils;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.Map;
 
 @Controller
 public class MainController {
